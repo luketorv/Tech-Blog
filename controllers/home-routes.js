@@ -10,28 +10,29 @@ router.get("/", (req, res) => {
    .then((dbPostData) => {
      const posts = dbPostData.map((post) => post.get({ plain: true }));
 	// pass in all posts data into the ‘all-posts’ template
-     res.render("all-posts", { posts });
+    //  res.render("all-posts", { posts });
+    res.json(posts);
    })
    .catch((err) => {
      res.status(500).json(err);
    });
 });
 
-router.get("/post/:id", (req, res) => {
-    //follow a similar pattern to the homepage route. 
-    //get the data using the id in params, then pass it into the ‘single-post’ view
-   Post.findByPk(req.params.id, { })  
-   res.render("single-post", { post });
-  })
+// router.get("/post/:id", (req, res) => {
+//     //follow a similar pattern to the homepage route. 
+//     //get the data using the id in params, then pass it into the ‘single-post’ view
+//    Post.findByPk(req.params.id, { })  
+//    res.render("single-post", { post });
+//   })
   
-  router.get("/login", (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect("/");
-      return;
-    }
+//   router.get("/login", (req, res) => {
+//     if (req.session.loggedIn) {
+//       res.redirect("/");
+//       return;
+//     }
     
-    res.render("login");
-   });
+//     res.render("login");
+//    });
 
    module.exports = router;
    
